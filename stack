@@ -1,0 +1,38 @@
+# Stack Operation using CLASS
+
+class Stack:
+    def __init__(self, max=100):
+        self.stack = []
+        self.maximum = max
+
+    def push(self, element):
+        if len(self.stack) == self.maximum:
+            print("Stack Overflow")
+        else:
+            self.stack.append(element)
+
+    def pop(self):
+        if len(self.stack) == 0:
+            print("Stack is Empty")
+        else:
+            return self.stack.pop()
+
+    def display(self):
+        if len(self.stack) == 0:
+            print("Stack is Empty")
+        else:
+            print(self.stack)
+
+stack = Stack(5)
+while True:
+    print("1. Push  2. Pop  3. Display  4. Exit")
+    choice = int(input("Enter your choice: "))
+    if choice == 1:
+        element = input("Enter ele to be pushed: ")
+        stack.push(element)
+    elif choice == 2:
+        print("Popped Element", element)
+    elif choice == 3:
+        stack.display()
+    else:
+        break
