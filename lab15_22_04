@@ -1,0 +1,31 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+data = pd.read_csv('FremontBridge.csv',index_col = 'Date', parse_dates = True)
+data.columns = ['Total','East','West']
+data.head()
+
+
+
+
+
+# i) Average daily bicycle counts
+avg_daily_count = data.groupby(data.index.dayofweek).mean()
+print(avg_daily_count)
+avg_daily_count.index = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+avg_daily_count.plot(style = [':','--','-'])
+
+
+
+# ii) Average hourly bicycle counts by weekday and weekend.
+import numpy as np
+days = np.where(data.index.dayofweek < 5, 'Weekday','Weekend')
+avg_hourly_count = data.groupby([days,data.index.time]).mean()
+print(avg_hourly_count)
+avg_hourly_count.loc['Weekday'].plot(title = 'Weekdays', style = [':','--','-'])
+avg_hourly_count.loc['Weekend'].plot(title = 'Weekends', style = [':','--','-'])
+
+
+
+
+
+
